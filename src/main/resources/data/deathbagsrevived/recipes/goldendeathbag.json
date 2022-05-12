@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    }
+  ],
+  "result": {
+    "item": "deathbagsrevived:goldendeathbag",
+    "count": 1
+  }
+}
+

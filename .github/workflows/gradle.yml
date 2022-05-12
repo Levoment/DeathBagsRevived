@@ -1,0 +1,54 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches:
+      - release/*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - uses: actions/checkout@v3
+
+      # Set up JDK
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt-hotspot'
+          java-version: '17'
+
+      # Set up gradle execute permissions
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # Build the project with gradle
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      # Extract the mod version
+      - name: Set mod version variable
+        id: set-mod-version
+        run: echo "::set-output name=MOD_VERSION::$(grep 'mod_version' ./gradle.properties | grep -P -o '(\d+.\d+.\d+)')"
+      # Extract the mod version
+      - name: Set mod archive base name variable
+        id: set-mod-archive-base-name
+        run: echo "::set-output name=ARCHIVE_BASENAME::$(grep 'archives_base_name' ./gradle.properties | grep -P -o '(?<=\=).*' | sed -e 's/^[ \t]*//')"
+      # Show file names
+      - name: Show file names
+        id: show-file-names
+        run: ls ./build/libs/
+
+      # Create a release. Use the output from steps: set-mod-archive-base-name and set-mod-version for the name of the release
+      - name: Create release using GitHub API
+        run: gh release create ${{ github.ref }} './build/libs/${{ steps.set-mod-archive-base-name.outputs.ARCHIVE_BASENAME }}-${{ steps.set-mod-version.outputs.MOD_VERSION }}.jar' --title '${{ steps.set-mod-archive-base-name.outputs.ARCHIVE_BASENAME }} ${{ steps.set-mod-version.outputs.MOD_VERSION }}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ env.GITHUB_ACTOR }}
+          REPO: ${{ github.repository }}

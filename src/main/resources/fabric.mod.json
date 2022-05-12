@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "deathbagsrevived",
+  "version": "${version}",
+
+  "name": "Death Bags Revived",
+  "description": "Adds Death Bags to Minecraft to keep a player's inventory after death.",
+  "authors": [
+    "Levoment"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "The Unlicense",
+  "icon": "assets/deathbagsrevived/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.levoment.deathbagsrevived.DeathBagsRevivedMod"
+    ],
+    "client": [
+      "com.github.levoment.deathbagsrevived.DeathBagsRevivedModClient"
+    ]
+  },
+  "mixins": [
+    "deathbagsrevived.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.12.11",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+  "suggests": {
+  }
+}
