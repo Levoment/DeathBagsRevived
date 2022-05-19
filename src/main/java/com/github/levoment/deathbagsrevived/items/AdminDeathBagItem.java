@@ -3,7 +3,7 @@ package com.github.levoment.deathbagsrevived.items;
 import com.github.levoment.deathbagsrevived.AdminDeathBagScreenHandlerFactory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -32,7 +32,7 @@ public class AdminDeathBagItem extends GoldenDeathBagItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        AdminDeathBagScreenHandlerFactory adminDeathBagScreenHandlerFactory= new AdminDeathBagScreenHandlerFactory(new LiteralText(this.playerName));
+        AdminDeathBagScreenHandlerFactory adminDeathBagScreenHandlerFactory= new AdminDeathBagScreenHandlerFactory(Text.of(this.playerName));
         user.openHandledScreen(adminDeathBagScreenHandlerFactory);
         return TypedActionResult.success(this.asItem().getDefaultStack());
     }

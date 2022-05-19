@@ -6,7 +6,6 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -17,7 +16,7 @@ public class DeathBagScreen extends HandledScreen<ScreenHandler> {
     private static final Identifier DEATH_BAG_TEXTURE = new Identifier("deathbagsrevived", "textures/gui/container/deathbag.png");
 
     public DeathBagScreen(ScreenHandler handler, PlayerInventory inventory, Text title) {
-        super(handler, inventory, new LiteralText(title.getString()).formatted(Formatting.GOLD).fillStyle(Style.EMPTY.withExclusiveFormatting(Formatting.BLUE)));
+        super(handler, inventory, Text.of(title.getString()).getWithStyle(Style.EMPTY.withFormatting(Formatting.GOLD, Formatting.BLUE)).get(0));
         this.backgroundWidth = 195;
         this.backgroundHeight = 222;
     }

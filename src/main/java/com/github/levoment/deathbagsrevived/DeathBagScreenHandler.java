@@ -202,6 +202,7 @@ public class DeathBagScreenHandler extends ScreenHandler {
 
     @Override
     public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
+        super.onSlotClick(slotIndex, button, actionType, player);
         if (player instanceof ServerPlayerEntity) {
             if (slotIndex < 0) {
                 if (slotIndex == -999 && actionType == SlotActionType.PICKUP) {

@@ -16,6 +16,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -61,6 +64,7 @@ public class DeathBagsRevivedMod implements ModInitializer {
                         ServerPlayerEntity serverPlayerEntity = context.getSource().getPlayer();
                         // Get the current player inventory
                         PlayerInventory playerInventory = serverPlayerEntity.getInventory();
+
 
                         // Create the item
                         Item item = DeathBagsRevivedMod.adminDeathBagItem.getDefaultStack().getItem();
