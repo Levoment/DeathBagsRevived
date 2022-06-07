@@ -5,7 +5,7 @@ import com.github.levoment.deathbagsrevived.items.DeathBagItem;
 import com.github.levoment.deathbagsrevived.items.GoldenDeathBagItem;
 import com.github.levoment.deathbagsrevived.mixin.EntitySelectorAccessor;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.command.EntitySelector;
 import net.minecraft.command.argument.EntityArgumentType;
@@ -16,9 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -51,7 +48,7 @@ public class DeathBagsRevivedMod implements ModInitializer {
         Registry.register(Registry.SCREEN_HANDLER, new Identifier(MOD_ID, "deathbag"), DEATH_BAG_SCREEN_HANDLER_TYPE);
         Registry.register(Registry.SCREEN_HANDLER, new Identifier(MOD_ID, "admindeathbag"), ADMIN_DEATH_BAG_SCREEN_HANDLER_TYPE);
 
-        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated, environment) -> {
             dispatcher.register(CommandManager.literal("giveDeathBagFrom")
                     .then(CommandManager.argument("targets", EntityArgumentType.players())
                     .requires(source -> source.hasPermissionLevel(4))
